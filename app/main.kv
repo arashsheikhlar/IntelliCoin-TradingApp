@@ -1,0 +1,38 @@
+
+#: import Home viewsdir.home.Home
+#: import Signup viewsdir.signup.Signup
+#: import Signin viewsdir.signin.Signin
+
+#: import BackBoxWidget widgetsdir.box.BackBoxWidget
+#: import RoundedButton widgetsdir.buttons.RoundedButton
+#: import FlatButtonWidget widgetsdir.buttons.FlatButtonWidget
+#: import IconButtonWidget widgetsdir.buttons.IconButtonWidget
+#: import BlankTextFieldWidget widgetsdir.textfields.BlankTextFieldWidget
+#: import Text widgetsdir.labels.Text
+#: import Graph kivy.garden.graph.Graph
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
+#: import icon kivy.garden.iconfonts.icon
+
+<MainWindow>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: app.colors.original
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    ScreenManager:
+        id: screen_mngr
+        transition: WipeTransition()
+        Screen:
+            name: 'screen_signin'
+            Signin:
+                id: signinF
+        Screen:
+            name: 'screen_home'
+            Home:
+                id: home
+        Screen:
+            name: 'screen_signup'
+            Signup:
+                id: signup

@@ -1,0 +1,129 @@
+#: import Window kivy.core.window.Window
+
+<OverviewScrn>:
+    orientation: 'vertical'
+    spacing: dp(5)
+    BoxLayout:
+        padding: [dp(13), dp(5)]
+        size_hint_y: .1
+        Text:
+            text: 'Check your state!'
+            color: app.colors.white
+            font_size: app.fonts.size.s4
+    BoxLayout:
+        size_hint_y: .15
+        padding: [dp(62), dp(16)]
+        spacing: dp(8)
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: .15
+            height: dp(14)
+            RoundedButton:
+                text: "refresh"
+                halign: 'center'
+                valign: 'middle'
+                color: app.colors.grey_dark2
+                font_name: app.fonts.subheadingfont
+                font_size: app.fonts.size.s4
+                color: app.colors.white
+                radius: [dp(8)]
+                size_hint_y: .99
+                bcolor: app.colors.thirdlevel_light
+                on_release: root.refresh_()
+    BoxLayout:
+        size_hint_y: .25
+        padding: [dp(13), dp(5)]
+        orientation: 'vertical'
+        valign: 'bottom'
+        BoxLayout:
+            orientation: 'horizontal'
+            halign: 'center'
+            Text:
+                text: 'Assets Value'
+                color: app.colors.white
+                font_size: app.fonts.size.s4
+                halign: 'center'
+            Text:
+                text: '$ %s'%str(root.current_cryptoBalance)
+                color: app.colors.white
+                font_size: app.fonts.size.s2
+                font_name: app.fonts.headingfont
+                halign: 'center'
+        BoxLayout:
+            orientation: 'horizontal'
+            halign: 'center'
+            Text:
+                text: 'USD Balance | Kraken'
+                color: app.colors.white
+                font_size: app.fonts.size.s6
+                halign: 'center'
+            Text:
+                text: '$ %s'%str(root.current_cryptoBalance)
+                color: app.colors.white
+                font_size: app.fonts.size.s3
+                font_name: app.fonts.subheadingfont
+                halign: 'center'
+        BoxLayout:
+            orientation: 'horizontal'
+            Text:
+                text: 'USD Balance | OkCoin'
+                color: app.colors.white
+                font_size: app.fonts.size.s6
+                halign: 'center'
+            Text:
+                text: '$ %s'%str(root.current_cryptoBalance)
+                color: app.colors.white
+                font_size: app.fonts.size.s3
+                font_name: app.fonts.subheadingfont
+                halign: 'center'
+    BoxLayout:
+        size_hint_y: .36
+        padding: [dp(13), dp(5)]
+        orientation: 'vertical'
+        spacing: dp(9)
+        Text:
+            text: "My Crypto Assets"
+            color: app.colors.white
+            font_name: app.fonts.bodyfont
+            font_size: app.fonts.size.s4
+            size_hint_y: None
+            height: dp(19)
+        BoxLayout:
+            ScrollView:
+                bar_inactive_color: [0.1,0,0,0]
+                bar_active_color: [0.1,0,0,0]
+                do_scroll: [True, False]
+                size: self.parent.size
+                GridLayout:
+                    id: gl_my_assets_ID
+                    rows: 1
+                    size: self.minimum_size
+                    spacing: sp(13)
+    BoxLayout:
+        size_hint_y: .36
+        padding: [dp(13), dp(5)]
+        orientation: 'vertical'
+        spacing: dp(9)
+        Text:
+            text: "My Crypto Watchlist"
+            font_name: app.fonts.bodyfont
+            color: app.colors.white
+            font_size: app.fonts.size.s4
+            size_hint_y: None
+            height: dp(19)
+        BoxLayout:
+            ScrollView:
+                bar_active_color: [0.1,0,0,0]
+                do_scroll: [False, True]
+                bar_inactive_color: [0.1,0,0,0]
+                size_hint_y: None
+                height: self.parent.height
+                GridLayout:
+                    id: gl_watchlist_ID
+                    cols: 1
+                    spacing: dp(5)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+
+    

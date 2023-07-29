@@ -1,0 +1,204 @@
+
+
+<CoinExchange>:
+    padding: [0, dp(13), 0, dp(9)]
+    spacing: dp(13)
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: "vertical"
+        spacing: dp(9)
+        padding: [dp(13), dp(13), 0, dp(5)]
+        size_hint_y: .05
+        Text:
+            text: "Exchanges"
+            color: app.colors.white
+            font_name: app.fonts.subheadingfont
+            font_size: app.fonts.size.s4
+            size_hint_y: None
+            height: dp(17)
+        BoxLayout:
+            ScrollView:
+                bar_inactive_color: [0.1,0,0,0]
+                size_hint: [None, None]
+                bar_active_color: [0.1,0,0,0]
+                do_scroll: [True, False]
+                size: self.parent.size
+                GridLayout:
+                    id: gl_connected_ID
+                    size_hint: [None, None]
+                    rows: 2
+                    size: self.minimum_size
+                    spacing: sp(13)
+    BoxLayout:
+        size_hint_y: .90
+        padding: [dp(12), dp(5)]
+        spacing: dp(9)
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(19)
+            Text:
+                text: "Click to connect to your preferred exchange"
+                color: app.colors.white
+                font_name: app.fonts.bodyfont
+                font_size: app.fonts.size.s6
+        BoxLayout:
+            ScrollView:
+                bar_active_color: [0.1,0,0,0]
+                do_scroll: [False, True]
+                bar_inactive_color: [0.1,0,0,0]
+                height: self.parent.height
+                size_hint_y: None
+                GridLayout:
+                    id: gl_exchanges_ID
+                    cols: 1
+                    size_hint_y: .36
+                    spacing: dp(19)
+                    height: self.minimum_height
+
+<ExchangeTile>:
+    height: dp(225)
+    size_hint_y: None
+    spacing: dp(1)
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: app.colors.subordinate
+        RoundedRectangle:
+            radius: [dp(15)]
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        size_hint_x: .99
+        size_hint_y: .1
+    AnchorLayout:
+        size_hint_x: .99
+        size_hint_y: .4
+        padding: [dp(95), dp(5)]
+        width: self.height
+        Widget:
+            canvas.before:
+                Color:
+                    rgba: [1.1,1,1,1]
+                Ellipse:
+                    source: root.source
+                    pos: self.pos
+                    size: self.size
+    Text:
+        text: root.exchangeTitle
+        color: app.colors.white
+        halign: 'center'
+        valign: 'top'
+        font_name: app.fonts.headingfont
+        font_size: app.fonts.size.s4
+        size_hint_x: .99
+        size_hint_y: .3
+    BoxLayout:
+        size_hint_x: .99
+        size_hint_y: .3
+        orientation: 'horizontal'
+        spacing: dp(33)
+        padding: [dp(25), dp(5)]
+        RoundedButton:
+            text: "connect"
+            halign: 'center'
+            valign: 'middle'
+            color: app.colors.white
+            font_name: app.fonts.subheadingfont
+            font_size: app.fonts.size.s5
+            radius: [dp(14)]
+            size_hint_y: .7
+            bcolor: app.colors.subordinate
+            on_release: root.get_connect()
+        RoundedButton:
+            text: "disconnect"
+            halign: 'center'
+            valign: 'middle'
+            color: app.colors.grey_dark2
+            font_name: app.fonts.subheadingfont
+            font_size: app.fonts.size.s5
+            radius: [dp(14)]
+            size_hint_y: .7
+            bcolor: app.colors.subordinate
+    BoxLayout:
+        size_hint_x: .99
+        size_hint_y: .1
+
+<NewExchange>:
+    size_hint: [.81, .61]
+    background: ""
+    background_color: [0,0,0, .1]
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(13)
+        padding: dp(13)
+        canvas.before:
+            Color:
+                rgba: app.colors.thirdlevel_light
+            RoundedRectangle:
+                radius: [self.height*.05]
+                pos: self.pos
+                size: self.size
+        Text:
+            text: root.exchangeTitle
+            color: app.colors.white
+            halign: 'center'
+            valign: 'top'
+            font_name: app.fonts.headingfont
+            font_size: app.fonts.size.s2
+        BoxLayout:
+            spacing: dp(15)
+            orientation: 'vertical'
+            size_hint_y: .81
+            Text:
+                text: "API key"
+                color: app.colors.white
+                halign: 'left'
+            BackBoxWidget:
+                radius: [dp(2)]
+                size_hint_y: None
+                height: dp(44)
+                padding: [dp(9), 0]
+                bcolor: app.colors.subordinate
+                BlankTextFieldWidget:
+                    id: key
+                    password: True
+            Text:
+                text: "API secret"
+                color: app.colors.white
+                halign: 'left'
+            BackBoxWidget:
+                radius: [dp(2)]
+                size_hint_y: None
+                height: dp(43)
+                padding: [dp(9), 0]
+                bcolor: app.colors.subordinate
+                BlankTextFieldWidget:
+                    id: secret
+                    password: True
+            Text:
+                text: "passphrase"
+                color: app.colors.white
+                halign: 'left'
+                opacity: 1 if root.passphrase_ else 0
+            BackBoxWidget:
+                radius: [dp(2)]
+                size_hint_y: None
+                height: dp(43) if root.passphrase_ else dp(0)
+                padding: [dp(9), 0]
+                bcolor: app.colors.subordinate
+                opacity: 1 if root.passphrase_ else 0
+                BlankTextFieldWidget:
+                    id: password
+                    password: True
+                    disabled: False if root.passphrase_ else True
+            Widget:
+            RoundedButton:
+                text: "Add an account"
+                font_name: app.fonts.subheadingfont
+                color: app.colors.white
+                radius: [dp(9)]
+                bcolor: app.colors.original
+                size_hint_y: None
+                height: dp(43)
+                on_release: root.add_exchange_account()

@@ -1,0 +1,379 @@
+
+<AssetView>:
+    background_color: app.colors.original
+    background: ""
+    BoxLayout:
+        orientation: "vertical"
+        spacing: dp(12)
+        AnchorLayout:
+            size_hint_y: None
+            height: dp(32)
+            anchor_x: 'left'
+            padding: dp(8)
+            FlatButtonWidget:
+                text: icon("icon-arrow-left")
+                color: app.colors.white
+                font_size: app.fonts.size.s2
+                size_hint_x: None
+                width: self.height
+                on_release: root.dismiss()
+        BoxLayout:
+            size_hint_y: .45
+            orientation: 'vertical'
+            spacing: dp(9)
+            padding: [dp(13), dp(9)]
+            BoxLayout:
+                size_hint_y: None
+                height: dp(31)
+                BoxLayout:
+                    size_hint_x: None
+                    width: self.height
+                    padding: dp(5)
+                    RelativeLayout:
+                        AsyncImage:
+                            id: imgproxy
+                            source: root.source
+                            opacity: 1
+                        Widget:
+                            canvas.before:
+                                Color:
+                                    rgba: [1.1,1,1,1]
+                                Ellipse:
+                                    size: self.size[0], self.size[1]
+                                    pos: self.pos
+                                    texture: imgproxy.texture
+                Text:
+                    font_name: app.fonts.headingfont
+                    text: root.cryptoCurrency
+                    font_size: app.fonts.size.s2
+                    size_hint_x: .4
+                    color: app.colors.white
+                    halign: 'left'
+            BoxLayout:
+                spacing: dp(12)
+                size_hint_y: .25
+                BoxLayout:
+                    padding: dp(1)
+                    canvas.before:
+                        Color:
+                            rgba: app.colors.successful
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [dp(7)]
+                    RoundedButton:
+                        text: "BUY"
+                        color: app.colors.white
+                        bcolor: app.colors.Coral_Pink
+                        radius: [dp(8)]
+                        on_release: root.place_coin_order(True)
+                RoundedButton:
+                    text: "SELL"
+                    color: app.colors.white
+                    bcolor: app.colors.subordinate
+                    radius: [dp(7)]
+                    on_release: root.place_coin_order(False)
+            BoxLayout:
+                spacing: dp(5)
+                padding: [dp(5), dp(5)]
+                size_hint_x: .99
+                size_hint_y: .3
+                GraphToggle:
+                    text: "Hourly"
+                    color: app.colors.white
+                    on_release: root.update_graph("hour")
+                GraphToggle:
+                    text: "Daily"
+                    state: "down"
+                    color: app.colors.white
+                    on_release: root.update_graph("day")
+                GraphToggle:
+                    text: "Weekly"
+                    color: app.colors.white
+                    on_release: root.update_graph("week")
+                GraphToggle:
+                    text: "Monthly"
+                    color: app.colors.white
+                    on_release: root.update_graph("month")
+                GraphToggle:
+                    text: "Yearly"
+                    color: app.colors.white
+                    on_release: root.update_graph("year")
+            Graph:
+                id: asset_graph_ID
+                xmax: len(root.chart_data)
+                xmin: 0
+                ymin: 0.11
+                ymax: 7.1
+                draw_border: False
+        BoxLayout:
+            height: dp(100)
+            size_hint_y: .1
+            orientation: "horizontal"
+            BoxLayout:
+                orientation: "vertical"
+                Text:
+                    text: "$%s"%root.cryptoAsset_value
+                    font_name: app.fonts.headingfont
+                    font_size: app.fonts.size.s1
+                    color: app.colors.white
+                    # size_hint_y: None
+                    halign: "center"
+                Text:
+                    text: "Value"
+                    font_name: app.fonts.subheadingfont
+                    color: app.colors.white
+                    font_size: app.fonts.size.s5
+                    halign: "center"
+                    valign: "top"
+                    # size_hint_y: None
+                    # height: dp(17)
+            BoxLayout:
+                orientation: "vertical"
+                Text:
+                    id: price_change
+                    font_name: app.fonts.headingfont
+                    color: app.colors.successful
+                    font_size: app.fonts.size.s2
+                    halign: "center"
+                    valign: "center"
+                    # height: dp(14)
+                Text:
+                    text: "Price change"
+                    font_name: app.fonts.subheadingfont
+                    color: app.colors.white
+                    font_size: app.fonts.size.s6
+                    halign: "center"
+                    valign: "top"
+        BoxLayout:
+            size_hint_y: .20
+            orientation: "vertical"
+            spacing: dp(7)
+            BoxLayout:
+                orientation: "horizontal"
+                BoxLayout:
+                    Text:
+                        text: "Market Cap: "
+                        font_name: app.fonts.bodyfont
+                        color: app.colors.white
+                        font_size: app.fonts.size.s6
+                BoxLayout:
+                    Text:
+                        id: market_cap_ID
+                        font_name: app.fonts.subheadingfont
+                        color: app.colors.white
+            BoxLayout:
+                orientation: "horizontal"
+                BoxLayout:
+                    Text:
+                        text: "Circulating Supply: "
+                        font_name: app.fonts.bodyfont
+                        color: app.colors.white
+                        font_size: app.fonts.size.s6
+                BoxLayout:
+                    Text:
+                        id: circulating_supply_ID
+                        font_name: app.fonts.subheadingfont
+                        color: app.colors.white
+            BoxLayout:
+                orientation: "horizontal"
+                BoxLayout:
+                    Text:
+                        text: "Total Supply: "
+                        font_name: app.fonts.bodyfont
+                        color: app.colors.white
+                        font_size: app.fonts.size.s6
+                BoxLayout:
+                    Text:
+                        id: total_supply_ID
+                        font_name: app.fonts.subheadingfont
+                        color: app.colors.white
+            BoxLayout:
+                orientation: "horizontal"
+                BoxLayout:
+                    Text:
+                        text: "24 Low ID: "
+                        font_name: app.fonts.bodyfont
+                        color: app.colors.white
+                        font_size: app.fonts.size.s6
+                BoxLayout:
+                    Text:
+                        id: low_ID
+                        font_name: app.fonts.subheadingfont
+                        color: app.colors.white
+            BoxLayout:
+                orientation: "horizontal"
+                BoxLayout:
+                    Text:
+                        text: "Total Volume: "
+                        font_name: app.fonts.bodyfont
+                        color: app.colors.white
+                        font_size: app.fonts.size.s6
+                BoxLayout:
+                    Text:
+                        id: volume_ID
+                        font_name: app.fonts.subheadingfont
+                        color: app.colors.white
+            BoxLayout:
+                orientation: "horizontal"
+                BoxLayout:
+                    Text:
+                        text: "24hr High: "
+                        font_name: app.fonts.bodyfont
+                        color: app.colors.white
+                        font_size: app.fonts.size.s6
+                BoxLayout:
+                    Text:
+                        id: high_ID
+                        font_name: app.fonts.subheadingfont
+                        color: app.colors.white
+        BoxLayout:
+            size_hint_y: .11
+            padding: dp(15)
+            spacing: dp(15)
+            RoundedButton:
+                text: "Add %s to Watchlist"%root.cryptoCurrency
+                color: app.colors.white
+                bcolor: app.colors.thirdlevel_light
+                radius: [dp(7)]
+                on_release: root.watch()
+
+<AssetOrder>:
+    background: ""
+    background_color: [0,0,0, .1]
+    AnchorLayout:
+        anchor_y: 'center'
+        BackBoxWidget:
+            bcolor: app.colors.thirdlevel_light
+            orientation: "vertical"
+            spacing: dp(5)
+            padding: dp(5)
+            size_hint_y: .7
+            size_hint_x: .7
+            BoxLayout:
+                size_hint_y: None
+                height: dp(43)
+                halign: 'right'
+                FlatButtonWidget:
+                    size_hint_x: None
+                    width: self.height
+                    text: icon("icon-x")
+                    color: app.colors.white
+                    on_release: root.dismiss()
+            BoxLayout:
+                size_hint_y: None
+                height: dp(65)
+                orientation: 'vertical'
+                Text:
+                    text: "USD Balance" if root.buy else "%s Balance"%root.cryptoCurrency
+                    font_name: app.fonts.subheadingfont
+                    font_size: app.fonts.size.s6
+                    color: app.colors.white
+                    halign: 'center'
+                    size_hint_y: .3
+                    size_hint_y: .3
+                Text:
+                    text: str(root.current_cryptoBalance)
+                    font_name: app.fonts.headingfont
+                    font_size: app.fonts.size.s4
+                    color: app.colors.white
+                    halign: 'center'
+                    valign: 'top'
+                    size_hint_y: .6
+            BoxLayout:
+                height: dp(65)
+                size_hint_y: None
+                orientation: 'vertical'
+                padding: [dp(8), dp(8)]
+                Text:
+                    text: " "
+                    font_name: app.fonts.subheadingfont
+                    font_size: app.fonts.size.s4
+                    color: app.colors.white
+                    halign: 'center'
+                    size_hint_y: .4
+                RoundedButton:
+                    text: str(root.current_cryptoOrder)
+                    padding: [dp(8), dp(8)]
+                    halign: 'center'
+                    valign: 'middle'
+                    color: app.colors.grey_dark2
+                    font_name: app.fonts.headingfont
+                    font_size: app.fonts.size.s2
+                    color: app.colors.white
+                    radius: [dp(4)]
+                    size_hint_y: .7
+                    bcolor: app.colors.subordinate
+            GridLayout:
+                id: numpad
+                spacing: dp(11)
+                cols: 3
+                height: dp(43)
+                padding: dp(4)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(43)
+                spacing: dp(17)
+                RoundedButton:
+                    text: "Buy with KRAKEN" if root.buy else "Sell with KRAKEN"
+                    bcolor: app.colors.Coral_Pink
+                    color: app.colors.white
+                    radius: [self.height*.2]
+                RoundedButton:
+                    text: "Buy with OKCOIN" if root.buy else "Sell with OKCOIN"
+                    bcolor: app.colors.Coral_Pink
+                    color: app.colors.white
+                    radius: [self.height*.21]
+                    on_release:
+                        root.dismiss()
+                        root.place_coin_order()
+
+<KeyPad>:
+    background_color: [0.1,0,0,0]
+    background_normal: ""
+    color: app.colors.grey_light
+    background_down: ""
+    size_hint_x: None
+    width: self.height
+    markup: True
+    canvas.before:
+        Color:
+            rgba: app.colors.subordinate if self.filled else [0.1,0,0,0]
+        Ellipse:
+            size: self.size[1], self.size[1]
+            pos: self.pos
+
+<Alert>:
+    background_color: [0.1,0,0,0]
+    background: ""
+    AnchorLayout:
+        anchor_y: "bottom"
+        padding: dp(17)
+        BackBoxWidget:
+            radius: [self.height/2]
+            bcolor: app.colors.subordinate
+            size_hint_x: .81
+            padding: [dp(11), dp(5)]
+            size_hint_y: None
+            height: dp(33)
+            Text:
+                text: root.text
+                color: app.colors.white
+                font_name: app.fonts.subheadingfont
+                halign: 'center'
+
+<GraphToggle@ToggleButton>:
+    background_color: [0.1,0,0,0]
+    background_normal: ""
+    background_down: ""
+    font_size: app.fonts.size.s6
+    background_disabled: ""
+    group: 'graph-tabs'
+    color: app.colors.grey_light
+    canvas.before:
+        Color:
+            rgba: app.colors.subordinate if self.state == 'down' else [0.1,0,0,0]
+        RoundedRectangle:
+            radius: [self.height*.15]
+            pos: self.pos
+            size: self.size

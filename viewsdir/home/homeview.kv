@@ -1,0 +1,63 @@
+#: import OverviewScrn viewsdir.overview.OverviewScrn
+#: import Suggestion viewsdir.suggestion.Suggestion
+#: import CoinExchange viewsdir.exchanges.CoinExchange
+
+
+
+<Home>:
+	orientation: 'vertical'
+	ScreenManager:
+		id: screen_mngr
+		Screen:
+			name: 'screen_suggestion'
+			Suggestion:
+				id: suggestion
+		Screen:
+			name: 'screen_exchanges'
+			CoinExchange:
+				id: exchangeID
+		Screen:
+			name: 'screen_overview'
+			OverviewScrn:
+				id: overviewID
+	AnchorLayout:
+		size_hint_y: None
+		height: dp(65)
+		BoxLayout:
+			size_hint_x: .31
+			spacing: dp(19)
+			padding: [dp(1), dp(21)]
+            TabIcon:
+				text: icon("icon-thumbs-up")
+				state: "down"
+				on_release:
+					self.state = "down"
+					screen_mngr.current = "screen_suggestion"
+			TabIcon:
+				text: icon("icon-repeat")
+				on_release: 
+					self.state = "down"
+					screen_mngr.current = "screen_exchanges"
+			TabIcon:
+				text: icon("icon-home")
+				on_release:
+					self.state = "down"
+					screen_mngr.current = "screen_overview"
+
+<TabIcon@ToggleButton>:
+	background_color: [0.1,0,0,0]
+	width: self.height
+	background_normal: ""
+	font_size: app.fonts.size.s1
+	background_disabled: ""
+	markup: True
+	background_down: ""
+	size_hint: [None, 1]
+	color: app.colors.white if self.state == 'down' else app.colors.subordinate
+	group: 'tabs'
+	canvas.before:
+		Color:
+			rgba: app.colors.original if self.state == 'down' else [0,0,0,0]
+		Ellipse:
+			pos: self.pos
+			size: self.size

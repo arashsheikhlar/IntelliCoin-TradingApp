@@ -1,0 +1,73 @@
+
+<Signup>:
+    orientation: "vertical"
+    spacing: dp(13)
+    padding: dp(27)
+    BackBoxWidget:
+        orientation: "vertical"
+        size_hint_y: .23
+        Text:
+            text: "Create an new account"
+            color: app.colors.white
+            font_size: app.fonts.size.s3
+            font_name: app.fonts.headingfont
+            halign: 'center'
+            valign: "bottom"
+    BackBoxWidget:
+        orientation: "vertical"
+        size_hint_y: .77
+        spacing: dp(11)
+        Text:
+            text: "Username"
+            color: app.colors.grey_light
+            font_size: app.fonts.size.s7
+            font_name: app.fonts.subheadingfont
+            halign: 'left'
+            valign: "bottom"
+        BackBoxWidget:
+            radius: [dp(9)]
+            padding: [dp(9), 0]
+            size_hint_y: None
+            height: dp(43)
+            bcolor: app.colors.subordinate
+            BlankTextFieldWidget:
+                id: username
+        Text:
+            text: "Password"
+            color: app.colors.grey_light
+            font_size: app.fonts.size.s7
+            font_name: app.fonts.subheadingfont
+            halign: 'left'
+            valign: "bottom"
+        BackBoxWidget:
+            radius: [dp(8)]
+            size_hint_y: None
+            height: dp(43)
+            padding: [dp(9), 0]
+            bcolor: app.colors.subordinate
+            BlankTextFieldWidget:
+                id: password
+                password: True
+        Widget:
+            size_hint_y: None
+            height: dp(43)
+        RoundedButton:
+            text: "Register"
+            color: app.colors.original
+            font_name: app.fonts.headingfont
+            radius: [dp(34)]
+            bcolor: app.colors.white
+            size_hint_y: None
+            height: dp(43)
+            on_release: root.signup()
+        RoundedButton:
+            text: "Log in"
+            color: app.colors.white
+            font_name: app.fonts.headingfont
+            radius: [dp(35)]
+            bcolor: app.colors.subordinate
+            size_hint_y: None
+            height: dp(42)
+            valign: "center"
+            on_release: app.root.ids.screen_mngr.current = 'screen_signin'
+        Widget:

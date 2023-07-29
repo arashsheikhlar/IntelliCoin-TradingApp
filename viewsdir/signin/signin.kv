@@ -1,0 +1,105 @@
+
+<Signin>:
+    orientation: "vertical"
+    spacing: dp(17)
+    padding: dp(27)
+    BackBoxWidget:
+        orientation: "vertical"
+        size_hint_y: .51
+        Text:
+            padding: [dp(9), 0]
+            text: "IntelliCoin"
+            color: app.colors.Peach_Orange
+            font_size: app.fonts.size.s0
+            font_name: app.fonts.headingfont
+            halign: 'center'
+            valign: "bottom"
+        Text:
+            text: "Leverage the power of AI"
+            color: app.colors.white
+            font_size: app.fonts.size.s3
+            font_name: app.fonts.subheadingfont
+            halign: 'center'
+            valign: "bottom"
+        Text:
+            text: "in crypto trading"
+            color: app.colors.white
+            font_size: app.fonts.size.s3
+            font_name: app.fonts.subheadingfont
+            halign: 'center'
+            valign: "top"
+    BackBoxWidget:
+        orientation: "vertical"
+        size_hint_y: .81
+        spacing: dp(6)
+        padding: [dp(8), 10]
+        Text:
+            text: "Username"
+            color: app.colors.grey_light
+            font_size: app.fonts.size.s7
+            font_name: app.fonts.subheadingfont
+            halign: 'left'
+            valign: "bottom"
+        BackBoxWidget:
+            radius: [dp(8)]
+            size_hint_y: None
+            height: dp(41)
+            padding: [dp(8), 0]
+            bcolor: app.colors.subordinate
+            BlankTextFieldWidget:
+                id: username
+        Text:
+            text: "Password"
+            color: app.colors.grey_light
+            font_size: app.fonts.size.s7
+            font_name: app.fonts.subheadingfont
+            halign: 'left'
+            valign: "bottom"
+        BackBoxWidget:
+            radius: [dp(8)]
+            size_hint_y: None
+            height: dp(42)
+            padding: [dp(8), 0]
+            bcolor: app.colors.subordinate
+            BlankTextFieldWidget:
+                id: password
+                password: True
+        Text:
+            text: ""
+            color: app.colors.grey_light
+            font_size: app.fonts.size.s7
+            font_name: app.fonts.subheadingfont
+            halign: 'left'
+            valign: "bottom"
+        Widget:
+            size_hint_y: None
+            height: dp(1)
+        RoundedButton:
+            text: "Log in"
+            font_size: app.fonts.size.s5
+            color: app.colors.original
+            font_name: app.fonts.headingfont
+            radius: [dp(34)]
+            bcolor: app.colors.white
+            size_hint_y: None
+            height: dp(40)
+            on_release: root.signinF()
+        RoundedButton:
+            text: "Create an account"
+            color: app.colors.white
+            font_name: app.fonts.headingfont
+            font_size: app.fonts.size.s6
+            radius: [dp(34)]
+            bcolor: app.colors.subordinate
+            size_hint_y: None
+            height: dp(40)
+            valign: "center"
+            on_release: app.root.ids.screen_mngr.current = 'screen_signup'
+        Widget:
+        Text:
+            text: "Created by A. Sheikhlar"
+            color: app.colors.Peach_Orange
+            font_size: app.fonts.size.s7
+            font_name: app.fonts.subheadingfont
+            halign: 'left'
+            valign: "center"
